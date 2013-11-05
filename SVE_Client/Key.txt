@@ -1,0 +1,68 @@
+//CLient
+CREATE
+keytool -genkey -keyalg RSA -alias clientAlias -storetype JCEKS -keystore ClientKeyStore.ks
+
+Password: 123456
+
+EXPORT
+keytool -export -alias clientAlias -keystore ClientKeyStore.ks -storetype JCEKS -rfc -file Client.cer 
+
+Password: 123456
+
+IMPORT
+keytool -import -alias clientAlias -file Client.cer -storetype JCEKS -keystore ClientTrustStore.ks 
+
+Password: 123456
+
+IMPORT
+keytool -import -alias ClaAlias -file Cla.cer -storetype JCEKS -keystore ClientTrustStore.ks 
+
+//TODO
+IMPORT
+keytool -import -alias CtdAlias -file Ctf.cer -storetype JCEKS -keystore ClientTrustStore.ks 
+
+
+//CLA
+CREATE
+keytool -genkey -keyalg RSA -alias ClaAlias -storetype JCEKS -keystore ClaKeyStore.ks
+
+Password: 123456
+
+EXPORT
+keytool -export -alias ClaAlias -keystore ClaKeyStore.ks -storetype JCEKS -rfc -file Cla.cer 
+
+Password: 123456
+
+IMPORT
+keytool -import -alias ClaAlias -file Cla.cer -storetype JCEKS -keystore ClaTrustStore.ks 
+
+Password: 123456
+
+IMPORT
+keytool -import -alias clientAlias -file Client.cer -storetype JCEKS -keystore ClaTrustStore.ks
+
+IMPORT
+keytool -import -alias CtfAlias -file Ctf.cer -storetype JCEKS -keystore ClaTrustStore.ks
+
+
+//CTF
+CREATE
+keytool -genkey -keyalg RSA -alias CtfAlias -storetype JCEKS -keystore CtfKeyStore.ks
+
+Password: 123456
+
+EXPORT
+keytool -export -alias CtfAlias -keystore CtfKeyStore.ks -storetype JCEKS -rfc -file Ctf.cer 
+
+Password: 123456
+
+IMPORT
+keytool -import -alias CtfAlias -file Ctf.cer -storetype JCEKS -keystore CtfTrustStore.ks 
+
+Password: 123456
+
+IMPORT
+keytool -import -alias clientAlias -file Client.cer -storetype JCEKS -keystore CtfTrustStore.ks 
+
+IMPORT
+keytool -import -alias ClaAlias -file Cla.cer -storetype JCEKS -keystore CtfTrustStore.ks 
